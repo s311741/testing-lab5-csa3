@@ -1,2 +1,4 @@
 build*/
 images/
+fuzz-outputs/
+procfuzz-outputs/
