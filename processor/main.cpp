@@ -24,7 +24,8 @@ int main(int argc, char** argv) {
 
   const char* image_filename = argv[1];
   auto image_bytes = get_whole_file(image_filename);
-  assert(image_bytes.size() % sizeof(u32) == 0);
+  if (image_bytes.size() % sizeof(u32))
+    FATAL("Image should contain whole number of 4-byte words");
 
   auto image_u32s = std::span{
     reinterpret_cast<const u32*>(image_bytes.data()),

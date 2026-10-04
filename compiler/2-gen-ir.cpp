@@ -154,8 +154,12 @@ struct Compiler {
       // in code, however many times execution reaches it.
       if (args.size() != 1 || !args[0].is<Ast::Number>())
         error("Syntax: (alloc-static CONSTANT-AMOUNT)");
+      auto size = args[0].as<Ast::Number>().value;
+      constexpr int max_size = 1024 * 1024;
+      if (size > max_size)
+        error("alloc-static argument {} too large, max {}", size, max_size);
       auto address = int32_t(static_data.size());
-      static_data.resize(static_data.size() + args[0].as<Ast::Number>().value);
+      static_data.resize(static_data.size() + size);
       return Ir::Constant(address);
     }
     return std::nullopt;

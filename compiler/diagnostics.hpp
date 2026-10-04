@@ -1,5 +1,8 @@
 #pragma once
+#include <cstdio>
+#include <cstdlib>
 #include <fmt/core.h>
+#include <utility>
 
 // Compiler error, for when the victim Lisp program is beyond repair
 template<typename... Args>

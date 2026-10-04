@@ -42,6 +42,8 @@ struct Lexer {
     int c = is.peek();
     if (c == -1)
       return std::nullopt;
+    if (!std::isprint(c) && c != '\n')
+      error("Bad character {:#x}", unsigned(c));
     return char(c);
   }
 
